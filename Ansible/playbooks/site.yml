@@ -16,7 +16,7 @@
 
     - name: create Nginx configuration file in the /etc/nginx/sites-available directory.     
       template:
-        src: "{{playbook_dir}}/../roles/umami/templates/umami.conf.j2"
+        src: "{{playbook_dir}}/../roles/umami/templates/umami.conf"
         dest: /etc/nginx/sites-available/umami.conf
         owner: root
         group: root
@@ -24,6 +24,7 @@
   
     - name : Enable the Nginx configuration file
       shell: ln -s /etc/nginx/sites-available/umami.conf /etc/nginx/sites-enabled/
+      become: yes
       notify:
         - restart nginx
 
