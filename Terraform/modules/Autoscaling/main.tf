@@ -74,7 +74,7 @@ resource "aws_autoscaling_group" "nginx-asg" {
   health_check_type         = "ELB"
   desired_capacity          = var.desired_capacity
   
-  vpc_zone_identifier = var.public_subnets
+  vpc_zone_identifier = var.private_subnets
 
   launch_template {
     id      = aws_launch_template.nginx-launch-template.id
