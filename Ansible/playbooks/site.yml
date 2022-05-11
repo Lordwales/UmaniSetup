@@ -1,4 +1,4 @@
 ---
-- host: nginx
-- name: Install Nginx
-  import_playbook: ../static-assignmments/nginx.yml
+- host: umami
+- name: Install application and its dependencies
+  import_playbook: ../static-assignmments/umami.yml

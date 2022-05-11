@@ -29,4 +29,11 @@
     src: "{{playbook_dir}}/../roles/umami/files/umami.sh"
     dest: /var/www/umami/
 
+#start the application
+- name: Start the application
+  become: yes
+  service:
+    name: umami
+    state: started
+    enabled: yes
 

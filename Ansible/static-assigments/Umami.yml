@@ -1,0 +1,6 @@
+---
+- hosts: umami
+  roles:
+    - nodejs
+    - umami
+    - nginx
