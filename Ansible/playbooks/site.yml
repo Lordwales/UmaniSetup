@@ -2,3 +2,28 @@
 - host: umami
 - name: Install application and its dependencies
   import_playbook: ../static-assignmments/umami.yml
+
+- name: Nginx Umami configuration tasks
+  tasks:
+    - name: Allow public traffic to ports 80 and 443 (HTTP and HTTPS) using the “Nginx Full” UFW application profile
+      ufw:
+        name: "Nginx Full"
+        state: enabled
+        rules:
+          - allow: https
+        notify:
+          - restart: ufw  
+
+    - name: create Nginx configuration file in the /etc/nginx/sites-available directory.     
+      template:
+        src: "{{playbook_dir}}/../roles/umami/templates/umami.conf.j2"
+        dest: /etc/nginx/sites-available/umami.conf
+        owner: root
+        group: root
+        mode: 0644
+  
+    - name : Enable the Nginx configuration file
+      shell: ln -s /etc/nginx/sites-available/umami.conf /etc/nginx/sites-enabled/
+      notify:
+        - restart nginx
+
