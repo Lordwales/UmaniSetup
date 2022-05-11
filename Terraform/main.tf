@@ -26,3 +26,33 @@ module "AutoScaling" {
   keypair           = var.keypair
 
 }
+
+# RDS module; this module will create the RDS instance in the private subnet
+
+module "RDS" {
+  source          = "./modules/RDS"
+  db-password     = var.master-password
+  db-username     = var.master-username
+  db-sg           = [module.security.datalayer-sg]
+  private_subnets = [module.VPC.private_subnets-2]
+}
+
+#Module for Application Load balancer, this will create Extenal Load balancer and internal load balancer
+module "ALB" {
+  source             = "./modules/ALB"
+  name               = "ACS-ext-alb"
+  vpc_id             = module.VPC.vpc_id
+  public-sg          = module.security.ALB-sg
+  private-sg         = module.security.IALB-sg
+  public-sbn-1       = module.VPC.public_subnets-1
+  public-sbn-2       = module.VPC.public_subnets-2
+  private-sbn-1      = module.VPC.private_subnets-1
+  private-sbn-2      = module.VPC.private_subnets-2
+  load_balancer_type = "application"
+  ip_address_type    = "ipv4"
+}
+
+module "security" {
+  source = "./modules/Security"
+  vpc_id = module.VPC.vpc_id
+}
