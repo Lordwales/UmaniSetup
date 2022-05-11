@@ -1,0 +1,4 @@
+---
+- host: nginx
+- name: Install Nginx
+  import_playbook: ../static-assignmments/nginx.yml

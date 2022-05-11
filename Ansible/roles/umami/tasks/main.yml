@@ -1,0 +1,32 @@
+- name: Clone the repository
+  ansible.builtin.git:
+   repo: https://github.com/mikecao/umami.git
+   clone: yes
+   dest: /home/ubuntu
+
+#copy folder to /var/www/
+- name: Copy folder to /var/www
+  copy:
+    src: /home/ubuntu/umami
+    dest: /var/www/
+
+- name: npm install
+  shell: cd /var/www/umami && npm install
+
+- name: Build the application
+  shell: cd /var/www/umami && npm run build 
+
+#copy local files to /var/www/umami
+- name: Copy local files to /var/www/umami
+  become: yes
+  copy:
+    src: "{{playbook_dir}}/../roles/umami/files/umami.service"
+    dest: /etc/systemd/system/
+
+#copy bash file to umami directory
+- name: Copy bash file to umami directory
+  copy:
+    src: "{{playbook_dir}}/../roles/umami/files/umami.sh"
+    dest: /var/www/umami/
+
+
