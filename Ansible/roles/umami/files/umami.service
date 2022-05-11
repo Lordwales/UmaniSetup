@@ -6,6 +6,8 @@ After=network.target
 [Service]
 Type=simple
 #User=$USER
+Environment=DATABASE_URL=connection url
+Environment=HASH_SALT=whistle
 WorkingDirectory=/var/www/umami
 ExecStart=/bin/bash /var/www/umami/start.sh
 Restart=always
