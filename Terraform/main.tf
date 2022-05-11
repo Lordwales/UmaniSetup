@@ -11,3 +11,18 @@ module "VPC" {
   private_subnets                     = [for i in range(1, 8, 2) : cidrsubnet(var.vpc_cidr, 8, i)]
   public_subnets                      = [for i in range(2, 5, 2) : cidrsubnet(var.vpc_cidr, 8, i)]
 }
+
+module "AutoScaling" {
+  source            = "./modules/Autoscaling"
+  ami-nginx         = var.ami-nginx
+  desired_capacity  = 1
+  min_size          = 1
+  max_size          = 1
+  nginx-sg          = [module.security.nginx-sg]
+  nginx-alb-tgt     = module.ALB.nginx-tgt
+  instance_profile  = module.VPC.instance_profile
+  public_subnets    = [module.VPC.public_subnets-1]
+  private_subnets   = [module.VPC.private_subnets-1, module.VPC.private_subnets-2]
+  keypair           = var.keypair
+
+}
