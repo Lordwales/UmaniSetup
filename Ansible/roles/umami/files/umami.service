@@ -6,7 +6,7 @@ After=network.target
 [Service]
 Type=simple
 #User=$USER
-Environment=DATABASE_URL=connection url
+Environment=DATABASE_URL=//waledevops:devops101@acs-database.cdqpbjkethv0.us-east-1.rds.amazonaws.com/daviddb     # gets the connectionurl from the RDS endpoint provisioned by Terraform
 Environment=HASH_SALT=whistle
 WorkingDirectory=/var/www/umami
 ExecStart=/bin/bash /var/www/umami/start.sh
