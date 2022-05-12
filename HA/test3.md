@@ -22,4 +22,8 @@ N.B. Only the LB and Bastion Host will have access to the application nodes.
 <br>
 This means we can scale up the nodes if some predefined metircs are met. That way, we can be guranteed that the application will be available. The load balancer will distribute the traffic to the nodes accordingly. Even if one of the nodes is down, a new one can be spinned up and the load balancer will distribute the traffic to the new node.
 
-3. Since we are using RDS as the database, we will make use of AWS Multi-AZ feature. Amazon RDS automatically creates a primary database (DB) instance and synchronously replicates the data to an instance in a different AZ. When it detects a failure, Amazon RDS automatically fails over to a standby instance without manual intervention.
+3. Since we are using RDS as the database, we will make use of AWS Multi-AZ feature. Amazon RDS automatically creates a primary database (DB) instance in one AZ and synchronously replicates the data to an instance in a different AZ. When it detects a failure, Amazon RDS automatically fails over to a standby instance without manual intervention. 
+<br>
+We can also further increase the availability of the application by adding another standby instance in a different AZ.
+
+4. Automated Backups will be implemented for the RDS instance as our backup strategy. This strategy allows us to recover data from any point in time i.e. it keep track of data every second and we can track back whenever it's neccessary. The backup retention period for the RDS instance will be set to 7 days.
