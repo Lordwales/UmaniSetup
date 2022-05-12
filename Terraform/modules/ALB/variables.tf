@@ -8,9 +8,9 @@ variable "public-sg" {
 variable "public-sbn-1" {
   description = "Public subnets to deploy external ALB"
 }
-variable "public-sbn-2" {
-  description = "Public subnets to deploy external  ALB"
-}
+# variable "public-sbn-2" {
+#   description = "Public subnets to deploy external  ALB"
+# }
 
 
 variable "vpc_id" {

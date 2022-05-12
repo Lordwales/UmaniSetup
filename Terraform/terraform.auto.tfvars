@@ -33,7 +33,7 @@ master-password = "devops101"
 account_no = "669699159433"
 
 tags = {
-  Enviroment      = "dev" 
+  Enviroment      = "dev"
   Owner-Email     = "tofadeolawale@gmail.com"
   Managed-By      = "Terraform"
   Billing-Account = "1234567890"

@@ -1,10 +1,10 @@
 variable "region" {
-  type = string
+  type        = string
   description = "The region to deploy resources"
 }
 
 variable "vpc_cidr" {
-  type = string
+  type        = string
   description = "The VPC cidr"
 }
 
@@ -13,7 +13,7 @@ variable "enable_dns_support" {
 }
 
 variable "enable_dns_hostnames" {
-     type = bool
+  type = bool
 }
 
 variable "enable_classiclink" {

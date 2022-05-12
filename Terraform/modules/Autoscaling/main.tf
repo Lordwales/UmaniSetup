@@ -10,10 +10,7 @@ name = "Default_CloudWatch_Alarms_Topic"
 
 resource "aws_autoscaling_notification" "walesdevops_notifications" {
   group_names = [
-    aws_autoscaling_group.bastion-asg.name,
     aws_autoscaling_group.nginx-asg.name,
-    aws_autoscaling_group.wordpress-asg.name,
-    aws_autoscaling_group.tooling-asg.name,
   ]
   notifications = [
     "autoscaling:EC2_INSTANCE_LAUNCH",

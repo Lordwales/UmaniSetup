@@ -8,14 +8,3 @@ output "nginx-tgt" {
   value       = aws_lb_target_group.nginx-tgt.arn
 }
 
-
-output "wordpress-tgt" {
-  description = "wordpress target group"
-  value       = aws_lb_target_group.wordpress-tgt.arn
-}
-
-
-output "tooling-tgt" {
-  description = "Tooling target group"
-  value       = aws_lb_target_group.tooling-tgt.arn
-}

@@ -68,8 +68,7 @@ resource "aws_lb" "ext-alb" {
   internal        = false
   security_groups = [var.public-sg]
 
-  subnets = [var.public-sbn-1,
-  var.public-sbn-2, ]
+  subnets = [var.public-sbn-1]
 
   tags = merge(
     var.tags,
